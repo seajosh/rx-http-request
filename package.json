@@ -6,7 +6,6 @@
     "module": "esm5/index.js",
     "es2015": "esm2015/index.js",
     "types": "index.d.ts",
-    "private": false,
     "scripts": {
         "pretest": "make clean && make pretest",
         "test": "make test",
@@ -50,24 +49,24 @@
     },
     "homepage": "https://github.com/akanass/rx-http-request#readme",
     "dependencies": {
-        "@types/node": "^12.6.2",
-        "@types/request": "^2.48.2",
+        "@types/node": "^20.12.2",
+        "@types/request": "^2.48.12",
         "request": "^2.88.0"
     },
     "devDependencies": {
-        "@types/fs-extra": "^8.0.0",
-        "@types/jest": "^24.0.15",
-        "browserify": "^16.3.0",
-        "coveralls": "^3.0.5",
-        "exorcist": "^1.0.1",
-        "fs-extra": "^8.1.0",
-        "jest": "^24.8.0",
-        "rimraf": "^2.6.3",
-        "rxjs": "^6.5.2",
-        "ts-jest": "^24.0.2",
-        "ts-node": "^8.3.0",
-        "tslint": "^5.18.0",
-        "typescript": "^3.5.3"
+        "@types/fs-extra": "^11.0.4",
+        "@types/jest": "^29.5.12",
+        "browserify": "^17.0.0",
+        "coveralls": "^3.1.1",
+        "exorcist": "^2.0.0",
+        "fs-extra": "^11.2.0",
+        "jest": "^29.7.0",
+        "rimraf": "^5.0.5",
+        "rxjs": "^7.8.1",
+        "ts-jest": "^29.1.2",
+        "ts-node": "^10.9.2",
+        "tslint": "^5.20.1",
+        "typescript": "^5.4.3"
     },
     "peerDependencies": {
         "rxjs": "^6.5.2"

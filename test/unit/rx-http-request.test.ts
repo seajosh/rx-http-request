@@ -44,7 +44,9 @@ describe('- Unit rx-http-request.test.ts file', () => {
      */
     test('- `Observable` rejects response if bad `method` parameter', () => {
         RxHR['_call']('unknown_method', uri)
-            .subscribe(() => undefined, e => expect(e.message).toBe('Cannot read property \'apply\' of undefined'));
+            .subscribe({
+                error: e => expect(e.message).toBe('Cannot read properties of undefined (reading \'apply\')')
+            });
     });
 
     /**

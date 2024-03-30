@@ -1,12 +1,12 @@
 // import libraries
 import * as request from 'request';
-import { Buffer } from 'buffer';
+import {Buffer} from 'buffer';
 
-import { merge, Observable, of, throwError } from 'rxjs';
-import { filter, flatMap, map, tap } from 'rxjs/operators';
+import {merge, mergeMap, Observable, of, throwError} from 'rxjs';
+import {filter, map, tap} from 'rxjs/operators';
 
 
-import { Cookie, RxCookieJar } from './rx-cookie-jar';
+import {Cookie, RxCookieJar} from './rx-cookie-jar';
 import RequestAPI = request.RequestAPI;
 import Request = request.Request;
 import CoreOptions = request.CoreOptions;
@@ -233,7 +233,7 @@ export class RxHttpRequest {
                 <RequestCallback>((error: any, response: RequestResponse, body: R) => {
                     of(of(error))
                         .pipe(
-                            flatMap(obsError =>
+                            mergeMap(obsError =>
                                 merge(
                                     obsError
                                         .pipe(
@@ -243,12 +243,12 @@ export class RxHttpRequest {
                                     obsError
                                         .pipe(
                                             filter(_ => !_),
-                                            flatMap(() =>
+                                            mergeMap(() =>
                                                 !!response ?
                                                     <Observable<RequestResponse>>of(response) :
                                                     throwError(new Error('No response found'))
                                             ),
-                                            flatMap(_ =>
+                                            mergeMap(_ =>
                                                 of({
                                                     response: <RequestResponse>_,
                                                     body: <R>body
@@ -260,12 +260,16 @@ export class RxHttpRequest {
                                 )
                             )
                         )
-                        .subscribe(() => undefined, err => observer.error(err));
+                        .subscribe({
+                            error: err => observer.error(err)
+                        });
                 })))
                 .pipe(
                     map(_ => this._request[<string>method].apply(<RequestAPI<Request, CoreOptions, RequiredUriUrl>>this._request, _)),
                 )
-                .subscribe(() => undefined, err => observer.error(err));
+                .subscribe({
+                    error: err => observer.error(err)
+                });
         });
     }
 
